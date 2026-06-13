@@ -61,125 +61,93 @@ const Landscape = () => (
 
 const LandingPage = () => {
   return (
-    <div className="min-h-screen text-gray-200 bg-gradient-to-b from-[#442C7D] via-[#2A3479] to-[#121B43] relative overflow-x-hidden selection:bg-blue-500/30">
+    <div className="min-h-screen text-gray-200 bg-gradient-to-b from-[#121B43] via-[#0A0F24] to-[#040611] relative overflow-hidden selection:bg-blue-500/30 flex flex-col">
       <StarrySky />
 
       {/* --- NAVBAR --- */}
-      <header className="relative z-50 flex items-center justify-between px-10 py-8 mx-auto max-w-[1400px]">
-        <div className="flex items-center gap-8">
-          {/* Logo */}
-          <div className="flex items-end gap-[3px]">
-            <div className="w-1.5 h-3 bg-white rounded-sm"></div>
-            <div className="w-1.5 h-5 bg-white rounded-sm"></div>
-            <div className="w-1.5 h-4 bg-white rounded-sm"></div>
-          </div>
-
-          <nav className="hidden gap-10 md:flex pl-8">
-            {['Offerings', 'Why Wealthy', 'Stories', 'Help'].map(item => (
-              <a key={item} href="#" className="text-sm tracking-wide text-gray-200 transition-colors hover:text-white">
-                {item}
-              </a>
-            ))}
-          </nav>
+      <header className="relative z-50 flex items-center justify-between px-6 py-6 mx-auto w-full max-w-[1400px]">
+        {/* Logo */}
+        <div className="flex items-center gap-2 cursor-pointer">
+          <span className="text-xl font-semibold tracking-wide text-white">Holy</span>
+          <span className="text-xl font-semibold tracking-wide text-[#5B85D9]">Verse</span>
         </div>
 
-        <button className="px-8 py-2 text-sm font-medium tracking-wide transition-colors border border-gray-400 rounded-full hover:bg-white hover:text-[#121B43]">
-          Login
-        </button>
-      </header>
-
-      {/* --- HERO SECTION --- */}
-      <section className="relative z-10 flex flex-col md:flex-row items-start min-h-[75vh] px-10 mx-auto max-w-[1400px]">
-        <div className="w-full md:w-1/2 pt-28 pb-32">
-          <h1 className="mb-10 text-[3.5rem] font-light leading-[1.1] tracking-wide text-white">
-            Explore the life you want to live. <br />
-            Put your money to work
-          </h1>
-          <button className="px-10 py-4 text-sm font-semibold tracking-wide text-white transition-colors bg-[#111636] rounded-full hover:bg-[#1A2352]">
-            Get in Touch
-          </button>
-        </div>
-
-        {/* Container untuk Landscape akan berada di belakang hero */}
-        <Landscape />
-      </section>
-
-      {/* --- BACKGROUND BAWAH GELAP --- */}
-      <div className="relative z-20 bg-gradient-to-b from-[#0A0F24] via-[#060917] to-[#0D1537] -mt-16 pt-32 pb-40">
-
-        {/* --- ADVANTAGE SECTION --- */}
-        <section className="px-10 mx-auto max-w-[1400px]">
-          <h2 className="mb-20 text-[2rem] font-light text-[#5B85D9] tracking-wide">Fitur Kami</h2>
-
-          <div className="grid grid-cols-1 gap-16 md:grid-cols-3 text-[#94A3B8]">
-            {/* Fitur 1 */}
-            <Link to="/detect" className="block p-6 transition-all border border-transparent rounded-2xl hover:bg-white/5 hover:border-white/10 group cursor-pointer">
-              <div className="mb-8 text-[#5B85D9] group-hover:scale-110 transition-transform">
-                <svg className="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-              </div>
-              <h3 className="mb-4 text-xl font-medium tracking-wide text-white group-hover:text-blue-300 transition-colors">Detect Ayat</h3>
-              <p className="text-sm leading-relaxed max-w-[280px]">
-                Gunakan AI untuk mendeteksi suara bacaan Anda dan otomatis memunculkan ayat sesudahnya.
-              </p>
-            </Link>
-            {/* Fitur 2 */}
-            <Link to="/pilih-juz" className="block p-6 transition-all border border-transparent rounded-2xl hover:bg-white/5 hover:border-white/10 group cursor-pointer">
-              <div className="mb-8 text-[#5B85D9] group-hover:scale-110 transition-transform">
-                <svg className="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-                </svg>
-              </div>
-              <h3 className="mb-4 text-xl font-medium tracking-wide text-white group-hover:text-blue-300 transition-colors">Pilih Juz</h3>
-              <p className="text-sm leading-relaxed max-w-[280px]">
-                Baca Al-Qur'an per Juz. Pilih dari 30 Juz dan mulai membaca dengan tampilan yang nyaman.
-              </p>
-            </Link>
-            {/* Fitur 3 */}
-            <Link to="/sambung-ayat" className="block p-6 transition-all border border-transparent rounded-2xl hover:bg-white/5 hover:border-white/10 group cursor-pointer">
-              <div className="mb-8 text-[#5B85D9] group-hover:scale-110 transition-transform">
-                <svg className="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                </svg>
-              </div>
-              <h3 className="mb-4 text-xl font-medium tracking-wide text-white group-hover:text-blue-300 transition-colors">Sambung Ayat</h3>
-              <p className="text-sm leading-relaxed max-w-[280px]">
-                Uji hafalan Anda dengan menyambung potongan ayat Al-Qur'an secara interaktif.
-              </p>
-            </Link>
-          </div>
-        </section>
-
-        {/* --- ANALYSIS SECTION --- */}
-        <section className="relative px-10 pt-48 mx-auto max-w-[1400px]">
-          {/* Bintang-bintang rasi di background */}
-          <div className="absolute top-20 right-40 w-full h-[400px] pointer-events-none">
-            <svg width="100%" height="100%" viewBox="0 0 800 400" className="opacity-40">
-              <polyline points="100,200 250,150 400,280 550,220 700,50" fill="none" stroke="#5B85D9" strokeWidth="1" opacity="0.5" />
-              <circle cx="100" cy="200" r="3" fill="#fff" />
-              <circle cx="250" cy="150" r="4" fill="#fff" />
-              <circle cx="400" cy="280" r="3" fill="#fff" />
-              <circle cx="550" cy="220" r="6" fill="#fff" className="animate-pulse" />
-              <circle cx="700" cy="50" r="3" fill="#fff" />
+        {/* Right Nav */}
+        <div className="flex items-center gap-6">
+          <div className="hidden sm:flex items-center gap-4 text-sm text-gray-400">
+            <span className="cursor-pointer hover:text-white transition-colors">ID</span>
+            <svg className="w-5 h-5 cursor-pointer hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
             </svg>
           </div>
+          <button className="px-6 py-2 text-sm font-medium tracking-wide text-white transition-all bg-[#5B85D9] rounded-full hover:bg-[#4A74C9] shadow-[0_0_15px_rgba(91,133,217,0.4)]">
+            Login
+          </button>
+        </div>
+      </header>
 
-          <div className="max-w-md relative z-10">
-            <p className="mb-6 text-[10px] tracking-[0.2em] text-[#5B85D9] uppercase font-semibold">Analysis of your wealth</p>
-            <h2 className="mb-10 text-[2.5rem] font-light leading-[1.2] text-white">
-              Helping you connect the dots.<br />
-              So you can see what life could look like into the future.
-            </h2>
-            <div className="text-[13px] leading-relaxed text-[#94A3B8] space-y-6 max-w-[400px]">
-              <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
-              <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-              <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-            </div>
-          </div>
-        </section>
+      {/* --- HERO SECTION (CENTERED) --- */}
+      <main className="relative z-10 flex flex-col items-center justify-center flex-1 w-full px-6 text-center animate-[fadeIn_0.6s_ease-out]">
+        
+        {/* Bismillah */}
+        <div className="mb-6">
+          <p className="text-4xl md:text-5xl font-arabic text-emerald-400/90 drop-shadow-[0_0_10px_rgba(52,211,153,0.3)]" dir="rtl">
+            بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ
+          </p>
+        </div>
 
-      </div>
+        {/* Version Badge */}
+        <div className="px-3 py-1 mb-10 text-[10px] font-medium tracking-widest text-[#5B85D9] uppercase border border-[#5B85D9]/30 rounded-full bg-[#5B85D9]/10">
+          Versi 1.1.0
+        </div>
+
+        {/* Main Title */}
+        <h1 className="mb-8 text-6xl md:text-8xl font-medium tracking-tight text-white drop-shadow-lg">
+          Holy <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-[#5B85D9] italic pr-2">Verse</span>
+        </h1>
+
+        {/* Subtitle */}
+        <div className="mb-10">
+          <h2 className="text-xs md:text-sm font-bold tracking-[0.3em] text-emerald-400/80 uppercase mb-4">
+            Latihan Hafalan Al-Qur'an
+          </h2>
+          <div className="w-32 h-[1px] bg-gradient-to-r from-transparent via-emerald-400/50 to-transparent mx-auto"></div>
+        </div>
+
+        {/* Quote */}
+        <div className="max-w-2xl mb-12 space-y-3">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed font-light italic">
+            "Dan Kami telah mudahkan Al-Qur'an untuk pelajaran, <br className="hidden md:block" />
+            maka adakah orang yang mau mengambil pelajaran?"
+          </p>
+          <p className="text-xs text-gray-500 tracking-widest uppercase">
+            (QS. Al Qamar: 17)
+          </p>
+        </div>
+
+        {/* Buttons */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 flex-wrap max-w-3xl mx-auto">
+          <Link 
+            to="/sambung-ayat"
+            className="w-full sm:w-auto px-8 py-3.5 text-sm font-medium tracking-wide text-gray-300 transition-all border border-white/20 rounded-full hover:bg-emerald-600 hover:border-emerald-500 hover:text-white hover:shadow-[0_4px_20px_rgba(5,150,105,0.4)] hover:-translate-y-0.5 text-center flex-1 sm:flex-none"
+          >
+            Sambung Ayat
+          </Link>
+          <Link 
+            to="/pilih-juz"
+            className="w-full sm:w-auto px-8 py-3.5 text-sm font-medium tracking-wide text-gray-300 transition-all border border-white/20 rounded-full hover:bg-emerald-600 hover:border-emerald-500 hover:text-white hover:shadow-[0_4px_20px_rgba(5,150,105,0.4)] hover:-translate-y-0.5 text-center flex-1 sm:flex-none"
+          >
+            Pilih Juz
+          </Link>
+          <Link 
+            to="/detect"
+            className="w-full sm:w-auto px-8 py-3.5 text-sm font-medium tracking-wide text-gray-300 transition-all border border-white/20 rounded-full hover:bg-emerald-600 hover:border-emerald-500 hover:text-white hover:shadow-[0_4px_20px_rgba(5,150,105,0.4)] hover:-translate-y-0.5 text-center flex-1 sm:flex-none"
+          >
+            Detect Ayat
+          </Link>
+        </div>
+
+      </main>
     </div>
   );
 };
