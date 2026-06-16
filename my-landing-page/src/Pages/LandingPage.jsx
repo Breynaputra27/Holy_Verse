@@ -2,151 +2,178 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../index.css';
 
-// Komponen untuk me-render bintang secara acak
-const StarrySky = () => {
-  const [stars, setStars] = useState([]);
+// Floating particles for the sky area
+const FloatingParticles = () => {
+  const [particles, setParticles] = useState([]);
 
   useEffect(() => {
-    // Membuat 150 bintang dengan posisi dan ukuran acak
-    const newStars = Array.from({ length: 150 }).map((_, i) => ({
+    const newParticles = Array.from({ length: 35 }).map((_, i) => ({
       id: i,
-      top: `${Math.random() * 100}%`,
+      top: `${Math.random() * 55}%`,
       left: `${Math.random() * 100}%`,
       size: Math.random() * 2 + 1 + 'px',
-      animationDuration: `${Math.random() * 3 + 2}s`,
+      animationDuration: `${Math.random() * 3 + 3}s`,
       animationDelay: `${Math.random() * 2}s`
     }));
-    setStars(newStars);
+    setParticles(newParticles);
   }, []);
 
   return (
-    <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-      {stars.map((star) => (
+    <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none">
+      {particles.map((p) => (
         <div
-          key={star.id}
+          key={p.id}
           className="star"
           style={{
-            top: star.top,
-            left: star.left,
-            width: star.size,
-            height: star.size,
-            animationDuration: star.animationDuration,
-            animationDelay: star.animationDelay
+            top: p.top,
+            left: p.left,
+            width: p.size,
+            height: p.size,
+            animationDuration: p.animationDuration,
+            animationDelay: p.animationDelay
           }}
         />
       ))}
-      {/* Bintang jatuh */}
-      <div className="absolute top-[15%] left-[40%] w-[100px] h-[1px] bg-gradient-to-r from-transparent via-white to-white -rotate-12 blur-[1px] opacity-70 animate-pulse"></div>
-      {/* Bulan sabit */}
-      <div className="absolute top-[12%] right-[35%] w-10 h-10 rounded-full shadow-[-8px_4px_0_0_#fefefe] rotate-[-25deg]"></div>
     </div>
   );
 };
 
-const Landscape = () => (
-  <div className="absolute bottom-0 left-0 right-0 z-0 h-[500px] pointer-events-none overflow-hidden">
-    {/* Siluet bukit menggunakan SVG melengkung */}
-    <svg className="absolute bottom-0 w-full h-full" preserveAspectRatio="none" viewBox="0 0 1440 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-      {/* Layer belakang */}
-      <path d="M0 300 C400 150, 800 350, 1440 250 L1440 500 L0 500 Z" fill="#1B2E6F" />
-      {/* Layer tengah */}
-      <path d="M0 380 C300 450, 700 200, 1440 380 L1440 500 L0 500 Z" fill="#111F54" />
-      {/* Layer depan */}
-      <path d="M0 450 C500 350, 1000 500, 1440 420 L1440 500 L0 500 Z" fill="#0A0F24" />
-      {/* Siluet rumput kasar */}
-      <path d="M0 480 Q 20 460 40 480 T 80 480 T 120 480 T 160 480 T 200 480 T 240 480 T 280 480 T 320 480 T 360 480 T 400 480 T 440 480 T 480 480 T 520 480 T 560 480 T 600 480 T 640 480 T 680 480 T 720 480 T 760 480 T 800 480 T 840 480 T 880 480 T 920 480 T 960 480 T 1000 480 T 1040 480 T 1080 480 T 1120 480 T 1160 480 T 1200 480 T 1240 480 T 1280 480 T 1320 480 T 1360 480 T 1400 480 T 1440 480 L1440 500 L0 500 Z" fill="#040611" />
-    </svg>
-  </div>
-);
-
 const LandingPage = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
-    <div className="min-h-screen text-gray-200 bg-gradient-to-b from-[#121B43] via-[#0A0F24] to-[#040611] relative overflow-hidden selection:bg-blue-500/30 flex flex-col">
-      <StarrySky />
+    <div className="min-h-screen text-gray-700 relative overflow-hidden selection:bg-teal-200/40 flex flex-col">
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: 'url(/bg-landing.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center bottom',
+          backgroundRepeat: 'no-repeat',
+        }}
+      />
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-transparent via-transparent to-white/10" />
+      <FloatingParticles />
 
-      {/* --- NAVBAR --- */}
-      <header className="relative z-50 flex items-center justify-between px-6 py-6 mx-auto w-full max-w-[1400px]">
-        {/* Logo */}
-        <div className="flex items-center gap-2 cursor-pointer">
-          <span className="text-xl font-semibold tracking-wide text-white">Holy</span>
-          <span className="text-xl font-semibold tracking-wide text-[#5B85D9]">Verse</span>
-        </div>
+      {/* === NAVBAR === */}
+      <header className="relative z-50 w-full">
+        <div className="flex items-center justify-between px-6 lg:px-12 py-5 mx-auto w-full max-w-[1400px]">
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2.5 cursor-pointer shrink-0">
+            <div className="w-8 h-8 rounded-full bg-[#264653]/15 flex items-center justify-center">
+              <span className="text-lg">☪</span>
+            </div>
+            <span className="text-xl font-bold tracking-wide text-[#264653]">Holy Verse</span>
+          </Link>
 
-        {/* Right Nav */}
-        <div className="flex items-center gap-6">
-          <div className="hidden sm:flex items-center gap-4 text-sm text-gray-400">
-            <span className="cursor-pointer hover:text-white transition-colors">ID</span>
-            <svg className="w-5 h-5 cursor-pointer hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
-            </svg>
+          {/* Center Nav Links (Desktop) */}
+          <nav className="hidden lg:flex items-center gap-8 text-sm font-medium text-[#264653]/70">
+            <Link to="/" className="hover:text-[#264653] transition-colors">Beranda</Link>
+            <a href="#tentang" className="hover:text-[#264653] transition-colors">Tentang Kami</a>
+            <div className="relative group">
+              <button className="flex items-center gap-1 hover:text-[#264653] transition-colors">
+                Program
+                <svg className="w-3.5 h-3.5 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              {/* Dropdown */}
+              <div className="absolute top-full left-0 mt-2 w-52 py-2 bg-white rounded-xl shadow-xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <Link to="/sambung-ayat" className="block px-4 py-2.5 text-sm text-gray-600 hover:text-[#264653] hover:bg-[#264653]/5 transition-colors">Sambung Ayat</Link>
+                <Link to="/pilih-juz" className="block px-4 py-2.5 text-sm text-gray-600 hover:text-[#264653] hover:bg-[#264653]/5 transition-colors">Pilih Juz</Link>
+                <Link to="/detect" className="block px-4 py-2.5 text-sm text-gray-600 hover:text-[#264653] hover:bg-[#264653]/5 transition-colors">Detect Ayat</Link>
+              </div>
+            </div>
+            <a href="#kontak" className="hover:text-[#264653] transition-colors">Kontak</a>
+          </nav>
+
+          {/* Right Actions (Desktop) */}
+          <div className="hidden lg:flex items-center gap-3">
+            <button className="px-5 py-2.5 text-sm font-medium text-[#264653] rounded-full hover:bg-[#264653]/5 transition-colors">
+              Sign in
+            </button>
+            <Link
+              to="/sambung-ayat"
+              className="px-6 py-2.5 text-sm font-semibold text-white bg-[#264653] rounded-full hover:bg-[#1d3640] transition-all shadow-[0_4px_15px_rgba(38,70,83,0.3)] hover:shadow-[0_6px_20px_rgba(38,70,83,0.4)] hover:-translate-y-0.5"
+            >
+              Get Started Now
+            </Link>
           </div>
-          <button className="px-6 py-2 text-sm font-medium tracking-wide text-white transition-all bg-[#5B85D9] rounded-full hover:bg-[#4A74C9] shadow-[0_0_15px_rgba(91,133,217,0.4)]">
-            Login
+
+          {/* Mobile Menu Toggle */}
+          <button
+            className="lg:hidden flex flex-col gap-1.5 p-2"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <span className={`block w-6 h-0.5 bg-[#264653] transition-transform ${menuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
+            <span className={`block w-6 h-0.5 bg-[#264653] transition-opacity ${menuOpen ? 'opacity-0' : ''}`}></span>
+            <span className={`block w-6 h-0.5 bg-[#264653] transition-transform ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
           </button>
         </div>
+
+        {/* Mobile Menu */}
+        {menuOpen && (
+          <div className="lg:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-gray-100 shadow-xl z-50 animate-[fadeIn_0.2s_ease-out]">
+            <div className="flex flex-col px-6 py-4 gap-1">
+              <Link to="/" className="py-3 text-[#264653] font-medium border-b border-gray-100">Beranda</Link>
+              <a href="#tentang" className="py-3 text-[#264653]/70 hover:text-[#264653] border-b border-gray-100">Tentang Kami</a>
+              <Link to="/sambung-ayat" className="py-3 text-[#264653]/70 hover:text-[#264653] border-b border-gray-100">Sambung Ayat</Link>
+              <Link to="/pilih-juz" className="py-3 text-[#264653]/70 hover:text-[#264653] border-b border-gray-100">Pilih Juz</Link>
+              <Link to="/detect" className="py-3 text-[#264653]/70 hover:text-[#264653] border-b border-gray-100">Detect Ayat</Link>
+              <a href="#kontak" className="py-3 text-[#264653]/70 hover:text-[#264653] border-b border-gray-100">Kontak</a>
+              <div className="flex flex-col gap-2 pt-4 pb-2">
+                <button className="py-2.5 text-sm font-medium text-[#264653] rounded-full border border-[#264653]/20">Sign in</button>
+                <Link to="/sambung-ayat" className="py-2.5 text-sm font-semibold text-white text-center bg-[#264653] rounded-full">Get Started Now</Link>
+              </div>
+            </div>
+          </div>
+        )}
       </header>
 
-      {/* --- HERO SECTION (CENTERED) --- */}
+      {/* === HERO SECTION === */}
       <main className="relative z-10 flex flex-col items-center justify-center flex-1 w-full px-6 text-center animate-[fadeIn_0.6s_ease-out]">
-        
-        {/* Bismillah */}
-        <div className="mb-6">
-          <p className="text-4xl md:text-5xl font-arabic text-emerald-400/90 drop-shadow-[0_0_10px_rgba(52,211,153,0.3)]" dir="rtl">
-            بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ
-          </p>
+
+        {/* Bismillah Badge */}
+        <div className="mb-8">
+          <div className="inline-block px-6 py-2.5 rounded-full bg-[#264653] shadow-[0_4px_20px_rgba(38,70,83,0.25)]">
+            <p className="text-lg md:text-xl font-arabic text-white tracking-wide" dir="rtl">
+              بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ
+            </p>
+          </div>
         </div>
 
-        {/* Version Badge */}
-        <div className="px-3 py-1 mb-10 text-[10px] font-medium tracking-widest text-[#5B85D9] uppercase border border-[#5B85D9]/30 rounded-full bg-[#5B85D9]/10">
-          Versi 1.1.0
-        </div>
-
-        {/* Main Title */}
-        <h1 className="mb-8 text-6xl md:text-8xl font-medium tracking-tight text-white drop-shadow-lg">
-          Holy <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-[#5B85D9] italic pr-2">Verse</span>
+        {/* Main Heading */}
+        <h1 className="mb-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#264653] leading-[1.15] max-w-3xl drop-shadow-sm">
+          Bangun Kebiasaan,{' '}
+          <br className="hidden sm:block" />
+          Jaga Hafalan.
         </h1>
 
         {/* Subtitle */}
-        <div className="mb-10">
-          <h2 className="text-xs md:text-sm font-bold tracking-[0.3em] text-emerald-400/80 uppercase mb-4">
-            Latihan Hafalan Al-Qur'an
-          </h2>
-          <div className="w-32 h-[1px] bg-gradient-to-r from-transparent via-emerald-400/50 to-transparent mx-auto"></div>
-        </div>
+        <p className="max-w-xl mb-10 text-sm sm:text-base md:text-lg text-[#264653]/60 leading-relaxed">
+          Langkah kecil setiap hari untuk interaksi yang lebih baik dengan Al-Quran.
+          Mulai dari tilawah yang nyaman dibaca, hingga fitur deteksi ayat untuk menemani perjalanan murojaahmu.
+        </p>
 
-        {/* Quote */}
-        <div className="max-w-2xl mb-12 space-y-3">
-          <p className="text-base md:text-lg text-gray-300 leading-relaxed font-light italic">
-            "Dan Kami telah mudahkan Al-Qur'an untuk pelajaran, <br className="hidden md:block" />
-            maka adakah orang yang mau mengambil pelajaran?"
-          </p>
-          <p className="text-xs text-gray-500 tracking-widest uppercase">
-            (QS. Al Qamar: 17)
-          </p>
-        </div>
-
-        {/* Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 flex-wrap max-w-3xl mx-auto">
-          <Link 
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-12">
+          <Link
             to="/sambung-ayat"
-            className="w-full sm:w-auto px-8 py-3.5 text-sm font-medium tracking-wide text-gray-300 transition-all border border-white/20 rounded-full hover:bg-emerald-600 hover:border-emerald-500 hover:text-white hover:shadow-[0_4px_20px_rgba(5,150,105,0.4)] hover:-translate-y-0.5 text-center flex-1 sm:flex-none"
+            className="w-full sm:w-auto px-8 py-3.5 text-sm font-semibold text-white bg-[#264653] rounded-full hover:bg-[#1d3640] transition-all shadow-[0_4px_15px_rgba(38,70,83,0.3)] hover:shadow-[0_6px_25px_rgba(38,70,83,0.4)] hover:-translate-y-0.5 flex items-center justify-center gap-2"
           >
-            Sambung Ayat
+            Lihat Program
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
           </Link>
-          <Link 
-            to="/pilih-juz"
-            className="w-full sm:w-auto px-8 py-3.5 text-sm font-medium tracking-wide text-gray-300 transition-all border border-white/20 rounded-full hover:bg-emerald-600 hover:border-emerald-500 hover:text-white hover:shadow-[0_4px_20px_rgba(5,150,105,0.4)] hover:-translate-y-0.5 text-center flex-1 sm:flex-none"
+          <a
+            href="#support"
+            className="w-full sm:w-auto px-8 py-3.5 text-sm font-semibold text-[#264653] bg-transparent rounded-full border-2 border-[#264653]/25 hover:border-[#264653]/50 hover:bg-[#264653]/5 transition-all flex items-center justify-center gap-2"
           >
-            Pilih Juz
-          </Link>
-          <Link 
-            to="/detect"
-            className="w-full sm:w-auto px-8 py-3.5 text-sm font-medium tracking-wide text-gray-300 transition-all border border-white/20 rounded-full hover:bg-emerald-600 hover:border-emerald-500 hover:text-white hover:shadow-[0_4px_20px_rgba(5,150,105,0.4)] hover:-translate-y-0.5 text-center flex-1 sm:flex-none"
-          >
-            Detect Ayat
-          </Link>
+            Support Saweria
+          </a>
         </div>
-
       </main>
     </div>
   );

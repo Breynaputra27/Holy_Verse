@@ -36,40 +36,6 @@ const juzData = [
   { number: 30, name: "Amma Yatasa'alun",        startSurah: 'An-Naba',       endSurah: 'An-Nas',         ayatRange: '1 – 6',     totalAyat: 564 },
 ];
 
-// Mini StarrySky untuk halaman ini
-const MiniStars = () => {
-  const [stars, setStars] = useState([]);
-  useEffect(() => {
-    const newStars = Array.from({ length: 80 }).map((_, i) => ({
-      id: i,
-      top: `${Math.random() * 100}%`,
-      left: `${Math.random() * 100}%`,
-      size: Math.random() * 1.5 + 0.5 + 'px',
-      animationDuration: `${Math.random() * 4 + 2}s`,
-      animationDelay: `${Math.random() * 3}s`
-    }));
-    setStars(newStars);
-  }, []);
-  return (
-    <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-      {stars.map((star) => (
-        <div
-          key={star.id}
-          className="star"
-          style={{
-            top: star.top,
-            left: star.left,
-            width: star.size,
-            height: star.size,
-            animationDuration: star.animationDuration,
-            animationDelay: star.animationDelay
-          }}
-        />
-      ))}
-    </div>
-  );
-};
-
 const PilihJuz = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedJuz, setSelectedJuz] = useState(null);
@@ -84,20 +50,15 @@ const PilihJuz = () => {
   );
 
   return (
-    <div className="min-h-screen text-gray-200 bg-gradient-to-b from-[#121B43] via-[#0A0F24] to-[#040611] relative overflow-x-hidden selection:bg-blue-500/30 flex flex-col">
-      <MiniStars />
+    <div className="min-h-screen text-gray-700 bg-gradient-to-b from-[#87CEEB] via-[#B5E3F0] to-[#E8F4F8] relative overflow-x-hidden selection:bg-teal-200/40 flex flex-col">
 
       {/* Header */}
-      <header className="relative z-50 flex items-center justify-between px-6 md:px-10 py-8 mx-auto max-w-[1400px] w-full">
-        <Link to="/" className="flex items-center gap-3 text-gray-400 transition-colors hover:text-white group">
+      <header className="relative z-50 flex items-center justify-between px-6 md:px-10 py-6 mx-auto max-w-[1400px] w-full">
+        <Link to="/" className="flex items-center gap-3 text-[#264653]/60 transition-colors hover:text-[#264653] group">
           <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
           <span className="text-sm font-medium tracking-wide">Kembali</span>
         </Link>
-        <div className="flex items-end gap-[3px]">
-          <div className="w-1.5 h-3 bg-white rounded-sm"></div>
-          <div className="w-1.5 h-5 bg-white rounded-sm"></div>
-          <div className="w-1.5 h-4 bg-white rounded-sm"></div>
-        </div>
+        <Link to="/" className="text-lg font-bold text-[#264653]">Holy Verse</Link>
       </header>
 
       {/* Main Content */}
@@ -105,29 +66,29 @@ const PilihJuz = () => {
 
         {/* Title Section */}
         <div className="mb-12 text-center md:text-left">
-          <h1 className="mb-4 text-4xl font-light tracking-wide text-white md:text-5xl">
-            Pilih <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#5B85D9] to-purple-400">Juz</span>
+          <h1 className="mb-4 text-4xl font-extrabold tracking-tight text-[#264653] md:text-5xl">
+            Pilih <span className="text-[#2A9D8F]">Juz</span>
           </h1>
-          <p className="text-[#94A3B8] max-w-lg mx-auto md:mx-0">
+          <p className="text-[#264653]/50 max-w-lg mx-auto md:mx-0">
             Pilih Juz yang ingin Anda baca. Tersedia 30 Juz lengkap dari Al-Qur'an.
           </p>
         </div>
 
         {/* Search Bar */}
         <div className="relative max-w-md mb-10">
-          <Search className="absolute w-4 h-4 text-gray-500 -translate-y-1/2 left-4 top-1/2" />
+          <Search className="absolute w-4 h-4 text-[#264653]/30 -translate-y-1/2 left-4 top-1/2" />
           <input
             id="search-juz"
             type="text"
             placeholder="Cari juz, nama, atau surah..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full py-3.5 pl-11 pr-10 text-sm text-gray-200 transition-all border rounded-2xl bg-white/[0.04] border-white/10 backdrop-blur-sm placeholder-gray-500 focus:outline-none focus:border-[#5B85D9]/50 focus:bg-white/[0.06] focus:shadow-[0_0_20px_rgba(91,133,217,0.1)]"
+            className="w-full py-3.5 pl-11 pr-10 text-sm text-[#264653] transition-all border rounded-2xl bg-white/60 backdrop-blur-sm border-white/80 placeholder-[#264653]/30 focus:outline-none focus:border-[#264653]/30 focus:bg-white/80 focus:shadow-[0_0_20px_rgba(38,70,83,0.08)] shadow-sm"
           />
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="absolute -translate-y-1/2 right-3 top-1/2 text-gray-500 hover:text-white transition-colors"
+              className="absolute -translate-y-1/2 right-3 top-1/2 text-[#264653]/30 hover:text-[#264653] transition-colors"
             >
               <X className="w-4 h-4" />
             </button>
@@ -138,7 +99,7 @@ const PilihJuz = () => {
         {!selectedJuz ? (
           <>
             {/* Juz Count */}
-            <p className="mb-6 text-xs tracking-widest text-[#5B85D9] uppercase font-semibold">
+            <p className="mb-6 text-xs tracking-widest text-[#2A9D8F] uppercase font-bold">
               {filteredJuz.length} Juz ditemukan
             </p>
 
@@ -152,30 +113,30 @@ const PilihJuz = () => {
                   onMouseEnter={() => setHoveredJuz(juz.number)}
                   onMouseLeave={() => setHoveredJuz(null)}
                   className="group relative p-5 text-left border rounded-2xl transition-all duration-300 overflow-hidden
-                    bg-white/[0.02] border-white/[0.06] 
-                    hover:bg-white/[0.06] hover:border-white/[0.15] hover:shadow-[0_8px_32px_rgba(91,133,217,0.12)]
+                    bg-white/50 backdrop-blur-sm border-white/70 shadow-sm
+                    hover:bg-white/80 hover:border-[#264653]/15 hover:shadow-[0_8px_32px_rgba(38,70,83,0.1)]
                     hover:-translate-y-1 active:scale-[0.98]"
                 >
                   {/* Glow effect on hover */}
                   <div className={`absolute -top-10 -right-10 w-24 h-24 rounded-full transition-opacity duration-500 blur-[30px] ${
                     hoveredJuz === juz.number ? 'opacity-100' : 'opacity-0'
-                  } bg-[#5B85D9]/20`}></div>
+                  } bg-[#2A9D8F]/15`}></div>
 
                   {/* Juz Number */}
                   <div className="relative z-10 flex items-center justify-between mb-3">
-                    <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#5B85D9]/20 to-purple-500/10 border border-[#5B85D9]/20 group-hover:border-[#5B85D9]/40 transition-colors">
-                      <span className="text-sm font-semibold text-[#5B85D9]">{juz.number}</span>
+                    <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-[#264653]/8 border border-[#264653]/10 group-hover:border-[#264653]/25 transition-colors">
+                      <span className="text-sm font-bold text-[#264653]">{juz.number}</span>
                     </div>
-                    <ChevronRight className="w-4 h-4 text-gray-600 group-hover:text-[#5B85D9] transition-all group-hover:translate-x-0.5" />
+                    <ChevronRight className="w-4 h-4 text-[#264653]/20 group-hover:text-[#2A9D8F] transition-all group-hover:translate-x-0.5" />
                   </div>
 
                   {/* Juz Name */}
-                  <h3 className="relative z-10 mb-2 text-sm font-medium text-white group-hover:text-blue-200 transition-colors leading-tight truncate">
+                  <h3 className="relative z-10 mb-2 text-sm font-semibold text-[#264653] group-hover:text-[#264653] transition-colors leading-tight truncate">
                     {juz.name}
                   </h3>
 
                   {/* Surah range */}
-                  <p className="relative z-10 text-[11px] text-gray-500 group-hover:text-gray-400 transition-colors leading-relaxed">
+                  <p className="relative z-10 text-[11px] text-[#264653]/35 group-hover:text-[#264653]/50 transition-colors leading-relaxed">
                     {juz.startSurah === juz.endSurah ? juz.startSurah : `${juz.startSurah} – ${juz.endSurah}`}
                   </p>
                 </button>
@@ -185,12 +146,12 @@ const PilihJuz = () => {
             {/* Empty State */}
             {filteredJuz.length === 0 && (
               <div className="flex flex-col items-center justify-center py-20 text-center">
-                <Search className="w-12 h-12 text-gray-600 mb-4" />
-                <p className="text-lg text-gray-400 mb-2">Juz tidak ditemukan</p>
-                <p className="text-sm text-gray-600">Coba kata kunci lain atau reset pencarian.</p>
+                <Search className="w-12 h-12 text-[#264653]/20 mb-4" />
+                <p className="text-lg text-[#264653]/50 mb-2">Juz tidak ditemukan</p>
+                <p className="text-sm text-[#264653]/30">Coba kata kunci lain atau reset pencarian.</p>
                 <button
                   onClick={() => setSearchQuery('')}
-                  className="mt-6 px-6 py-2 text-sm text-[#5B85D9] border border-[#5B85D9]/30 rounded-full hover:bg-[#5B85D9]/10 transition-colors"
+                  className="mt-6 px-6 py-2 text-sm text-[#2A9D8F] font-semibold border border-[#2A9D8F]/30 rounded-full hover:bg-[#2A9D8F]/10 transition-colors"
                 >
                   Reset Pencarian
                 </button>
@@ -204,63 +165,62 @@ const PilihJuz = () => {
             <button
               id="back-to-juz-list"
               onClick={() => setSelectedJuz(null)}
-              className="flex items-center gap-2 mb-8 text-sm text-gray-400 transition-colors hover:text-white group"
+              className="flex items-center gap-2 mb-8 text-sm text-[#264653]/50 transition-colors hover:text-[#264653] group"
             >
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
               <span>Kembali ke Daftar Juz</span>
             </button>
 
             {/* Juz Header Card */}
-            <div className="relative p-8 mb-8 border rounded-3xl bg-gradient-to-br from-white/[0.05] to-transparent border-white/10 backdrop-blur-md overflow-hidden">
+            <div className="relative p-8 mb-8 border rounded-3xl bg-white/60 backdrop-blur-md border-white/80 shadow-lg overflow-hidden">
               {/* Decorative glow */}
-              <div className="absolute top-0 right-0 w-40 h-40 bg-[#5B85D9]/15 rounded-full blur-[60px]"></div>
-              <div className="absolute bottom-0 left-0 w-32 h-32 bg-purple-500/10 rounded-full blur-[50px]"></div>
+              <div className="absolute top-0 right-0 w-40 h-40 bg-[#2A9D8F]/10 rounded-full blur-[60px]"></div>
 
               <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                 <div>
                   <div className="flex items-center gap-4 mb-3">
-                    <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-[#5B85D9]/30 to-purple-500/20 border border-[#5B85D9]/30">
-                      <span className="text-xl font-bold text-[#5B85D9]">{selectedJuz.number}</span>
+                    <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-[#264653]/10 border border-[#264653]/15">
+                      <span className="text-xl font-extrabold text-[#264653]">{selectedJuz.number}</span>
                     </div>
                     <div>
-                      <p className="text-[10px] tracking-[0.2em] text-[#5B85D9] uppercase font-semibold mb-1">Juz ke-{selectedJuz.number}</p>
-                      <h2 className="text-2xl font-light text-white">{selectedJuz.name}</h2>
+                      <p className="text-[10px] tracking-[0.2em] text-[#2A9D8F] uppercase font-bold mb-1">Juz ke-{selectedJuz.number}</p>
+                      <h2 className="text-2xl font-bold text-[#264653]">{selectedJuz.name}</h2>
                     </div>
                   </div>
                 </div>
 
                 <div className="flex gap-6 text-center md:text-right">
                   <div>
-                    <p className="text-[10px] tracking-widest text-gray-500 uppercase mb-1">Surah</p>
-                    <p className="text-sm text-gray-300">{selectedJuz.startSurah} – {selectedJuz.endSurah}</p>
+                    <p className="text-[10px] tracking-widest text-[#264653]/30 uppercase mb-1">Surah</p>
+                    <p className="text-sm text-[#264653]/70 font-medium">{selectedJuz.startSurah} – {selectedJuz.endSurah}</p>
                   </div>
-                  <div className="w-px bg-white/10"></div>
+                  <div className="w-px bg-[#264653]/10"></div>
                   <div>
-                    <p className="text-[10px] tracking-widest text-gray-500 uppercase mb-1">Ayat</p>
-                    <p className="text-sm text-gray-300">{selectedJuz.ayatRange}</p>
+                    <p className="text-[10px] tracking-widest text-[#264653]/30 uppercase mb-1">Ayat</p>
+                    <p className="text-sm text-[#264653]/70 font-medium">{selectedJuz.ayatRange}</p>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Reading Area Placeholder */}
-            <div className="relative p-10 border rounded-3xl bg-white/[0.02] border-white/[0.06] min-h-[400px] flex flex-col items-center justify-center text-center">
+            <div className="relative p-10 border rounded-3xl bg-white/40 backdrop-blur-sm border-white/60 shadow-sm min-h-[400px] flex flex-col items-center justify-center text-center">
               <div className="absolute inset-0 rounded-3xl overflow-hidden">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#5B85D9]/5 rounded-full blur-[80px]"></div>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#2A9D8F]/5 rounded-full blur-[80px]"></div>
               </div>
 
               {/* Ornamental border */}
               <div className="relative z-10">
                 <div className="flex items-center justify-center mb-6">
-                  <div className="w-12 h-px bg-gradient-to-r from-transparent to-[#5B85D9]/40"></div>
-                  <Star className="w-5 h-5 mx-3 text-[#5B85D9]/40" />
-                  <div className="w-12 h-px bg-gradient-to-l from-transparent to-[#5B85D9]/40"></div>
+                  <div className="w-12 h-px bg-gradient-to-r from-transparent to-[#264653]/20"></div>
+                  <Star className="w-5 h-5 mx-3 text-[#264653]/20" />
+                  <div className="w-12 h-px bg-gradient-to-l from-transparent to-[#264653]/20"></div>
                 </div>
 
-                <BookOpen className="w-16 h-16 text-[#5B85D9]/30 mx-auto mb-6" />
+                <BookOpen className="w-16 h-16 text-[#264653]/15 mx-auto mb-6" />
                 
-                <h3 className="text-xl font-light text-white mb-3">Area Bacaan Al-Qur'an</h3>
-                <p className="text-sm text-gray-500 max-w-sm mb-8">
+                <h3 className="text-xl font-bold text-[#264653] mb-3">Area Bacaan Al-Qur'an</h3>
+                <p className="text-sm text-[#264653]/40 max-w-sm mb-8">
                   Ayat-ayat dari Juz {selectedJuz.number} akan ditampilkan di sini. Fitur ini sedang dalam pengembangan.
                 </p>
 
@@ -272,26 +232,26 @@ const PilihJuz = () => {
                   ].map((surah, idx) => (
                     <div
                       key={idx}
-                      className="flex items-center justify-between p-4 border rounded-2xl bg-white/[0.03] border-white/[0.06] hover:bg-white/[0.06] hover:border-white/[0.12] transition-all cursor-pointer group"
+                      className="flex items-center justify-between p-4 border rounded-2xl bg-white/50 backdrop-blur-sm border-white/70 hover:bg-white/70 hover:border-[#264653]/15 transition-all cursor-pointer group shadow-sm"
                     >
                       <div className="flex items-center gap-4">
-                        <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-[#5B85D9]/10 border border-[#5B85D9]/15 text-xs text-[#5B85D9] font-semibold">
+                        <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-[#264653]/8 border border-[#264653]/10 text-xs text-[#264653] font-bold">
                           {idx + 1}
                         </div>
                         <div className="text-left">
-                          <p className="text-sm font-medium text-gray-200 group-hover:text-white transition-colors">{surah.name}</p>
-                          <p className="text-[11px] text-gray-600">{surah.type}</p>
+                          <p className="text-sm font-semibold text-[#264653]/70 group-hover:text-[#264653] transition-colors">{surah.name}</p>
+                          <p className="text-[11px] text-[#264653]/30">{surah.type}</p>
                         </div>
                       </div>
-                      <ChevronRight className="w-4 h-4 text-gray-600 group-hover:text-[#5B85D9] transition-all group-hover:translate-x-0.5" />
+                      <ChevronRight className="w-4 h-4 text-[#264653]/20 group-hover:text-[#2A9D8F] transition-all group-hover:translate-x-0.5" />
                     </div>
                   ))}
                 </div>
 
                 <div className="flex items-center justify-center mt-8">
-                  <div className="w-12 h-px bg-gradient-to-r from-transparent to-[#5B85D9]/40"></div>
-                  <Star className="w-5 h-5 mx-3 text-[#5B85D9]/40" />
-                  <div className="w-12 h-px bg-gradient-to-l from-transparent to-[#5B85D9]/40"></div>
+                  <div className="w-12 h-px bg-gradient-to-r from-transparent to-[#264653]/20"></div>
+                  <Star className="w-5 h-5 mx-3 text-[#264653]/20" />
+                  <div className="w-12 h-px bg-gradient-to-l from-transparent to-[#264653]/20"></div>
                 </div>
               </div>
             </div>

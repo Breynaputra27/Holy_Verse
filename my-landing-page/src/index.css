@@ -6,26 +6,36 @@
 
 @layer base {
   body {
-    @apply antialiased bg-[#020412] text-gray-200 font-['Outfit'];
+    @apply antialiased bg-[#E8F4F8] text-gray-700 font-['Outfit'];
   }
 }
 
 @layer utilities {
   .star {
     position: absolute;
-    background-color: white;
+    background-color: rgba(255,255,255,0.8);
     border-radius: 50%;
-    box-shadow: 0 0 4px 1px rgba(255,255,255,0.4);
+    box-shadow: 0 0 6px 2px rgba(255,255,255,0.5);
     animation: twinkle linear infinite;
   }
   
   @keyframes twinkle {
-    0%, 100% { opacity: 0.2; transform: scale(0.8); }
-    50% { opacity: 1; transform: scale(1.2); }
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 0.9; transform: scale(1.2); }
   }
 
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
   }
 }
